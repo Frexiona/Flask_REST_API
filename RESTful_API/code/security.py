@@ -1,5 +1,5 @@
-from werkzeug.security import safe_str_cmp # Just compare the String
-from user import User
+from werkzeug.security import safe_str_cmp  # Just compare the String
+from models.user import UserModel
 
 '''
 users = [
@@ -23,15 +23,17 @@ userid_mapping = {
 }
 '''
 
+
 def authenticate(username, password):
-	user = User.find_by_username(username)
-	if user and safe_str_cmp(user.password, password):
-		return user
+    user = UserModel.find_by_username(username)
+    if user and safe_str_cmp(user.password, password):
+        return user
+
 
 def identity(payload):
-	"""
-	Function in JWT
-	payload['identity'] will extract the id from the user
-	"""
-	user_id = payload['identity']
-	return User.find_by_id(user_id)
+    """
+    Function in JWT
+    payload['identity'] will extract the id from the user
+    """
+    user_id = payload['identity']
+    return UserModel.find_by_id(user_id)

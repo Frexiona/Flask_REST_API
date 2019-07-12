@@ -3,8 +3,8 @@ from flask_restful import Api, reqparse
 from flask_jwt import JWT
 
 from security import authenticate, identity
-from user import UserRegister
-from item import Item, ItemList
+from resources.user import UserRegister
+from resources.item import Item, ItemList
 
 app = Flask(__name__)
 app.secret_key = 'rex'
@@ -15,7 +15,6 @@ jwt = JWT(app, authenticate, identity)  # JWT will create a new end-point which 
 api.add_resource(UserRegister, '/register')
 api.add_resource(ItemList, '/items')
 api.add_resource(Item, '/item/<string:name>')
-
 
 '''
 class Student(Resource):
